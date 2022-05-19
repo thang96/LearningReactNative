@@ -9,7 +9,9 @@ import {
   Image,
 } from 'react-native';
 function UIInputButton(props) {
-  const {title, placeholder, keyboardType, secureTextEntry} = props;
+  const {title, placeholder, keyboardType, secureTextEntry, changeText, value} =
+    props;
+
   return (
     <View>
       <Text style={{fontSize: 24, color: '#E7421B', fontWeight: 'bold'}}>
@@ -17,12 +19,13 @@ function UIInputButton(props) {
       </Text>
       <TextInput
         secureTextEntry={secureTextEntry ?? false}
-        onChangeText={() => {}}
+        onChangeText={text => changeText(text)}
         returnKeyType="done"
         keyboardType={keyboardType ?? 'default'}
         placeholderTextColor={'grey'}
         placeholder={placeholder}
         style={styles.textInput}
+        value={value}
       />
     </View>
   );

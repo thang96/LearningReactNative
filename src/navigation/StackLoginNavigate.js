@@ -6,8 +6,10 @@ import {
   RegisterWithPhone,
   ForgotPasswordWithPhone,
   ForgotPasswordWithEmail,
+  ChangeColor,
 } from '../screens';
 import ModalPicked from '../components/ModalPicked';
+import TabManyThing from '../navigation/TabManyThing';
 function StackNavigation(props) {
   const Stack = createStackNavigator();
   return (
@@ -47,12 +49,26 @@ function StackNavigation(props) {
         name="ForgotPasswordWithEmail"
         component={ForgotPasswordWithEmail}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{
           headerShown: false,
         }}
         name="ModalPicked"
         component={ModalPicked}
+      /> */}
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="ChangeColor"
+        component={ChangeColor}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="TabManyThing"
+        component={TabManyThing}
       />
     </Stack.Navigator>
   );

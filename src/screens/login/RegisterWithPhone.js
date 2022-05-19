@@ -36,7 +36,11 @@ function RegisterWithPhone(props) {
           <UIPhoneInput />
         </View>
 
-        <TouchableOpacity style={styles.pressRegisterWithPhone}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('RegisterWithEmail');
+          }}
+          style={styles.pressRegisterWithPhone}>
           <Text style={styles.colorText}>Or register with email</Text>
         </TouchableOpacity>
 
