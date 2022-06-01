@@ -60,29 +60,78 @@ const DATA = [
 function ShuffeListData(props) {
   const [searchText, setSearchText] = useState('');
   const {width, height} = Dimensions.get('window');
-  const [a, setA] = useState(0);
-  useEffect(() => {
-    setInterval(() => {
-      console.log('timeout');
-    }, 3000);
-  }, []);
-  const filteredItem = () =>
-    datas.filter(data =>
-      data.key.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
-    );
-
+  const [datafilter, setDatafilter] = useState([]);
   const [datas, setDatas] = useState(DATA);
+  const filteredData = () => {
+    let DATAFILLER = {...datas};
+    let cloneDataFilter = [];
+    for (const [key, value] of Object.entries(DATAFILLER)) {
+      if (value.key.toLowerCase().includes(searchText.toLocaleLowerCase())) {
+        cloneDataFilter.push(value);
+      }
+    }
+    setDatas(cloneDataFilter);
+  };
+
+  const shuffledData = () => {
+    let shuffled = datas
+      .map(value => ({value, sort: Math.random()}))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({value}) => value);
+    setDatas(shuffled);
+  };
+
+  const [inter, setInter] = useState(null);
+  creatInterval = () => {
+    console.log('interval', inter);
+    if (inter) {
+      clearInterval(inter);
+    }
+    varinter = setInterval(() => {
+      shuffledData();
+    }, 5000);
+    setInter(varinter);
+    console.log('create', inter, varinter);
+  };
+  clearReturnInterVal = () => {
+    console.log('interval clear', inter);
+
+    if (inter) {
+      clearInterval(inter);
+      console.log('clearReturnInterVal');
+    } else {
+      console.log('no clear');
+    }
+  };
+  useEffect(() => {
+    filteredData();
+    // const interval = setInterval(() => {
+    //   shuffledData();
+    // }, 5000);
+    // return () => clearInterval(interval);
+  }, [datas.length]);
+
+  const renderItem = ({item, index}) => (
+    <TouchableOpacity style={[styles.backgroundItem, {width: width * 0.45}]}>
+      <Text style={{fontSize: 50, color: '#FAFAD2'}}>{item.value}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <Icon name="arrow-left" size={25} />
+          <TouchableOpacity onPress={() => clearReturnInterVal()}>
+            <Icon name="arrow-left" size={25} />
+          </TouchableOpacity>
           <TextInput
             onChangeText={text => setSearchText(text)}
             placeholder="search"
             style={styles.textSearch}
           />
-          <Icon name="search" size={25} />
+          <TouchableOpacity onPress={() => creatInterval()}>
+            <Icon name="search" size={25} />
+          </TouchableOpacity>
         </View>
         <View style={styles.viewProduct}>
           <View
@@ -91,19 +140,12 @@ function ShuffeListData(props) {
               flex: 1,
               backgroundColor: 'white',
             }}>
-            {filteredItem().length > 0 ? (
+            {datas.length > 0 ? (
               <FlatList
                 numColumns={2}
-                data={filteredItem()}
+                data={datas}
                 keyExtractor={key => key.key.toString()}
-                renderItem={({item, index}) => (
-                  <TouchableOpacity
-                    style={[styles.backgroundItem, {width: width * 0.45}]}>
-                    <Text style={{fontSize: 50, color: '#FAFAD2'}}>
-                      {item.value}
-                    </Text>
-                  </TouchableOpacity>
-                )}
+                renderItem={renderItem}
               />
             ) : (
               <View style={{justifyContent: 'center', alignItems: 'center'}}>

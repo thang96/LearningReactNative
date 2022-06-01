@@ -12,12 +12,20 @@ import {
   FlatList,
 } from 'react-native';
 import UIInputButton from '../../components/UIInputButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 function SetTime(props) {
   const [day, setDay] = useState(0);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
   console.log(day, hour, minute, second);
+  const [infomation, setInfomation] = useState([]);
+  useEffect(() => {
+    AsyncStorage.getItem('useInfo').then(value => {
+      setInfomation(JSON.parse(value));
+    });
+  }, []);
+  console.log(infomation);
   useEffect(() => {
     if (second > 60) {
       setMinute(minute + 1);
@@ -89,6 +97,7 @@ function SetTime(props) {
             value={second}
             placeholder={`${second}`}
           />
+          <Text>{infomation.user}</Text>
         </View>
       </View>
     </SafeAreaView>

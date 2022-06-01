@@ -9,13 +9,17 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import StackLoginNavigate from './src/navigation/StackLoginNavigate';
+import {Provider} from 'react-redux';
+import AppNavigation from './src/navigation/AppNavigation';
+import store from './src/redux/store';
 
 function App() {
   return (
-    <NavigationContainer>
-      <StackLoginNavigate />
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({

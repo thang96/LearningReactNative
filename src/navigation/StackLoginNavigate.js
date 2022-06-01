@@ -10,7 +10,7 @@ import {
 } from '../screens';
 import ModalPicked from '../components/ModalPicked';
 import TabManyThing from '../navigation/TabManyThing';
-function StackNavigation(props) {
+function StackLoginNavigate(props) {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator initialRouteName="LoginScreen">
@@ -73,4 +73,4 @@ function StackNavigation(props) {
     </Stack.Navigator>
   );
 }
-export default StackNavigation;
+export default StackLoginNavigate;

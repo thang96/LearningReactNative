@@ -1,4 +1,6 @@
 import LoginScreen from './login/LoginScreen';
+import HomeScreen from './home/HomeScreen';
+import Animation from './animation/Animation';
 import RegisterWithEmail from './login/RegisterWithEmail';
 import RegisterWithPhone from './login/RegisterWithPhone';
 import ForgotPasswordWithPhone from './login/ForgotPasswordWithPhone';
@@ -9,6 +11,7 @@ import SetTime from './many_thing/SetTime';
 import ShuffeListData from './many_thing/ShuffeListData';
 export {
   LoginScreen,
+  HomeScreen,
   RegisterWithEmail,
   RegisterWithPhone,
   ForgotPasswordWithPhone,
@@ -16,4 +19,5 @@ export {
   ChangeColor,
   SetTime,
   ShuffeListData,
+  Animation,
 };

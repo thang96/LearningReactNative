@@ -14,11 +14,16 @@ import UIButtonPress from '../../components/UIButtonPress';
 import UIInputButton from '../../components/UIInputButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {icons} from '../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {UPDATE_EMAIL} from '../../redux/actions/InfoAction';
+import {updateAuth} from '../../redux/actions/auth';
 
 function LoginScreen(props) {
   const navigation = useNavigation();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
@@ -59,11 +64,10 @@ function LoginScreen(props) {
         <View style={styles.viewButtonLogin}>
           <UIButtonPress
             onPress={() => {
-              // if (user == 'ad' && password == 123) {
-              navigation.navigate('TabManyThing');
-              // } else {
-              //   alert('Account is unexcep');
-              // }
+              const useInfo = {user, password};
+              AsyncStorage.setItem('useInfo', JSON.stringify(useInfo));
+              dispatch(updateAuth(Boolean(user)));
+              // navigation.navigate('TabManyThing');
             }}
             title={'Login'}
           />

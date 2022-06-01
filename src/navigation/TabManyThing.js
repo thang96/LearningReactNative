@@ -4,7 +4,7 @@ import {SetTime, ShuffeListData} from '../screens';
 const Tab = createBottomTabNavigator();
 function TabManyThing() {
   return (
-    <Tab.Navigator initialRouteName="ShuffeListData">
+    <Tab.Navigator initialRouteName="SetTime">
       <Tab.Screen
         options={{headerShown: false}}
         name="SetTime"
